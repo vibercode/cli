@@ -1,0 +1,101 @@
+before:
+  hooks:
+    - go mod tidy
+    - go generate ./...
+
+builds:
+  - env:
+      - CGO_ENABLED=0
+    goos:
+      - linux
+      - windows
+      - darwin
+    goarch:
+      - amd64
+      - arm64
+    main: ./
+    binary: vibercode
+    ldflags:
+      - -s -w -X main.version={{.Version}} -X main.commit={{.Commit}} -X main.date={{.Date}}
+
+archives:
+  - format: tar.gz
+    name_template: >-
+      {{ .ProjectName }}_
+      {{- title .Os }}_
+      {{- if eq .Arch "amd64" }}x86_64
+      {{- else if eq .Arch "386" }}i386
+      {{- else }}{{ .Arch }}{{ end }}
+      {{- if .Arm }}v{{ .Arm }}{{ end }}
+    format_overrides:
+      - goos: windows
+        format: zip
+
+checksum:
+  name_template: "checksums.txt"
+
+snapshot:
+  name_template: "{{ incpatch .Version }}-next"
+
+changelog:
+  sort: asc
+  filters:
+    exclude:
+      - "^docs:"
+      - "^test:"
+      - "^ci:"
+      - Merge pull request
+      - Merge branch
+      - go mod tidy
+
+release:
+  github:
+    owner: vibercode
+    name: cli
+  draft: false
+  prerelease: auto
+  name_template: "{{.ProjectName}} v{{.Version}}"
+  header: |
+    ## ViberCode CLI v{{.Version}}
+
+    Welcome to this new release of ViberCode CLI!
+
+    ### 🚀 Installation
+
+    #### macOS/Linux
+    ```bash
+    curl -sSfL https://raw.githubusercontent.com/vibercode/cli/main/install.sh | sh
+    ```
+
+    #### Manual Installation
+    Download the appropriate binary for your platform from the assets below.
+
+brews:
+  - repository:
+      owner: vibercode
+      name: homebrew-tap
+    folder: Formula
+    homepage: https://github.com/vibercode/cli
+    description: Generate Go APIs with clean architecture and visual editing
+    license: MIT
+    test: |
+      system "#{bin}/vibercode --version"
+    install: |-
+      bin.install "vibercode"
+
+nfpms:
+  - package_name: vibercode
+    file_name_template: "{{ .ConventionalFileName }}"
+    vendor: ViberCode
+    homepage: https://github.com/vibercode/cli
+    maintainer: ViberCode Team <team@vibercode.com>
+    description: |-
+      ViberCode CLI - Generate Go APIs with clean architecture, 
+      including visual React editor and integrated AI chat.
+    license: MIT
+    formats:
+      - apk
+      - deb
+      - rpm
+      - termux.deb
+      - archlinux
