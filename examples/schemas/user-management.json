@@ -1,0 +1,145 @@
+{
+  "name": "user-management",
+  "description": "User management system with roles and permissions",
+  "database": {
+    "provider": "postgres",
+    "host": "localhost",
+    "port": 5432,
+    "name": "user_mgmt_db",
+    "ssl": false
+  },
+  "features": {
+    "auth": true,
+    "swagger": true,
+    "docker": true,
+    "tests": true
+  },
+  "resources": [
+    {
+      "name": "User",
+      "fields": [
+        { "name": "id", "type": "uuid", "primary": true },
+        { "name": "email", "type": "string", "unique": true, "required": true },
+        {
+          "name": "username",
+          "type": "string",
+          "unique": true,
+          "required": true
+        },
+        { "name": "password", "type": "string", "required": true },
+        { "name": "firstName", "type": "string", "required": true },
+        { "name": "lastName", "type": "string", "required": true },
+        { "name": "phone", "type": "string" },
+        { "name": "avatar", "type": "string" },
+        { "name": "isActive", "type": "boolean", "default": true },
+        { "name": "emailVerified", "type": "boolean", "default": false },
+        { "name": "lastLoginAt", "type": "date" },
+        { "name": "createdAt", "type": "date" },
+        { "name": "updatedAt", "type": "date" }
+      ]
+    },
+    {
+      "name": "Role",
+      "fields": [
+        { "name": "id", "type": "uuid", "primary": true },
+        { "name": "name", "type": "string", "required": true, "unique": true },
+        { "name": "description", "type": "text" },
+        { "name": "isActive", "type": "boolean", "default": true },
+        { "name": "createdAt", "type": "date" },
+        { "name": "updatedAt", "type": "date" }
+      ]
+    },
+    {
+      "name": "Permission",
+      "fields": [
+        { "name": "id", "type": "uuid", "primary": true },
+        { "name": "name", "type": "string", "required": true, "unique": true },
+        { "name": "resource", "type": "string", "required": true },
+        { "name": "action", "type": "string", "required": true },
+        { "name": "description", "type": "text" },
+        { "name": "createdAt", "type": "date" }
+      ]
+    },
+    {
+      "name": "UserRole",
+      "fields": [
+        { "name": "id", "type": "uuid", "primary": true },
+        {
+          "name": "userId",
+          "type": "uuid",
+          "relation": "User",
+          "required": true
+        },
+        {
+          "name": "roleId",
+          "type": "uuid",
+          "relation": "Role",
+          "required": true
+        },
+        {
+          "name": "assignedBy",
+          "type": "uuid",
+          "relation": "User",
+          "required": true
+        },
+        { "name": "assignedAt", "type": "date" },
+        { "name": "expiresAt", "type": "date" }
+      ]
+    },
+    {
+      "name": "RolePermission",
+      "fields": [
+        { "name": "id", "type": "uuid", "primary": true },
+        {
+          "name": "roleId",
+          "type": "uuid",
+          "relation": "Role",
+          "required": true
+        },
+        {
+          "name": "permissionId",
+          "type": "uuid",
+          "relation": "Permission",
+          "required": true
+        },
+        { "name": "createdAt", "type": "date" }
+      ]
+    },
+    {
+      "name": "Session",
+      "fields": [
+        { "name": "id", "type": "uuid", "primary": true },
+        {
+          "name": "userId",
+          "type": "uuid",
+          "relation": "User",
+          "required": true
+        },
+        { "name": "token", "type": "string", "required": true, "unique": true },
+        { "name": "refreshToken", "type": "string", "unique": true },
+        { "name": "userAgent", "type": "string" },
+        { "name": "ipAddress", "type": "string" },
+        { "name": "isActive", "type": "boolean", "default": true },
+        { "name": "expiresAt", "type": "date", "required": true },
+        { "name": "createdAt", "type": "date" },
+        { "name": "updatedAt", "type": "date" }
+      ]
+    },
+    {
+      "name": "PasswordReset",
+      "fields": [
+        { "name": "id", "type": "uuid", "primary": true },
+        {
+          "name": "userId",
+          "type": "uuid",
+          "relation": "User",
+          "required": true
+        },
+        { "name": "token", "type": "string", "required": true, "unique": true },
+        { "name": "isUsed", "type": "boolean", "default": false },
+        { "name": "expiresAt", "type": "date", "required": true },
+        { "name": "createdAt", "type": "date" }
+      ]
+    }
+  ]
+}

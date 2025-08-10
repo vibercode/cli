@@ -1,0 +1,126 @@
+{
+  "name": "simple-blog",
+  "description": "A simple blog API with posts, comments, and categories",
+  "database": {
+    "provider": "postgres",
+    "host": "localhost",
+    "port": 5432,
+    "name": "blog_db",
+    "ssl": false
+  },
+  "features": {
+    "auth": true,
+    "swagger": true,
+    "docker": true,
+    "tests": true
+  },
+  "resources": [
+    {
+      "name": "User",
+      "fields": [
+        { "name": "id", "type": "uuid", "primary": true },
+        { "name": "email", "type": "string", "unique": true, "required": true },
+        {
+          "name": "username",
+          "type": "string",
+          "unique": true,
+          "required": true
+        },
+        { "name": "password", "type": "string", "required": true },
+        { "name": "firstName", "type": "string", "required": true },
+        { "name": "lastName", "type": "string", "required": true },
+        { "name": "avatar", "type": "string" },
+        { "name": "isActive", "type": "boolean", "default": true },
+        { "name": "createdAt", "type": "date" },
+        { "name": "updatedAt", "type": "date" }
+      ]
+    },
+    {
+      "name": "Category",
+      "fields": [
+        { "name": "id", "type": "uuid", "primary": true },
+        { "name": "name", "type": "string", "required": true, "unique": true },
+        { "name": "slug", "type": "string", "required": true, "unique": true },
+        { "name": "description", "type": "text" },
+        { "name": "color", "type": "string", "default": "#3B82F6" },
+        { "name": "createdAt", "type": "date" },
+        { "name": "updatedAt", "type": "date" }
+      ]
+    },
+    {
+      "name": "Post",
+      "fields": [
+        { "name": "id", "type": "uuid", "primary": true },
+        { "name": "title", "type": "string", "required": true },
+        { "name": "slug", "type": "string", "required": true, "unique": true },
+        { "name": "content", "type": "text", "required": true },
+        { "name": "excerpt", "type": "text" },
+        { "name": "featuredImage", "type": "string" },
+        { "name": "isPublished", "type": "boolean", "default": false },
+        { "name": "publishedAt", "type": "date" },
+        { "name": "viewCount", "type": "number", "default": 0 },
+        {
+          "name": "authorId",
+          "type": "uuid",
+          "relation": "User",
+          "required": true
+        },
+        {
+          "name": "categoryId",
+          "type": "uuid",
+          "relation": "Category",
+          "required": true
+        },
+        { "name": "createdAt", "type": "date" },
+        { "name": "updatedAt", "type": "date" }
+      ]
+    },
+    {
+      "name": "Comment",
+      "fields": [
+        { "name": "id", "type": "uuid", "primary": true },
+        { "name": "content", "type": "text", "required": true },
+        { "name": "authorName", "type": "string", "required": true },
+        { "name": "authorEmail", "type": "string", "required": true },
+        { "name": "isApproved", "type": "boolean", "default": false },
+        {
+          "name": "postId",
+          "type": "uuid",
+          "relation": "Post",
+          "required": true
+        },
+        { "name": "parentId", "type": "uuid", "relation": "Comment" },
+        { "name": "createdAt", "type": "date" },
+        { "name": "updatedAt", "type": "date" }
+      ]
+    },
+    {
+      "name": "Tag",
+      "fields": [
+        { "name": "id", "type": "uuid", "primary": true },
+        { "name": "name", "type": "string", "required": true, "unique": true },
+        { "name": "slug", "type": "string", "required": true, "unique": true },
+        { "name": "createdAt", "type": "date" }
+      ]
+    },
+    {
+      "name": "PostTag",
+      "fields": [
+        { "name": "id", "type": "uuid", "primary": true },
+        {
+          "name": "postId",
+          "type": "uuid",
+          "relation": "Post",
+          "required": true
+        },
+        {
+          "name": "tagId",
+          "type": "uuid",
+          "relation": "Tag",
+          "required": true
+        },
+        { "name": "createdAt", "type": "date" }
+      ]
+    }
+  ]
+}
