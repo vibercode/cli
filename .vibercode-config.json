@@ -1,0 +1,25 @@
+{
+  "vibe": {
+    "auto_open_browser": true,
+    "auto_install_deps": true,
+    "editor_port": 5173,
+    "websocket_port": 3001,
+    "default_mode": "general",
+    "editor_path": ""
+  },
+  "editor": {
+    "theme": "dark",
+    "auto_save": true,
+    "live_reload": true
+  },
+  "paths": {
+    "react_editor": "../vibercode/editor",
+    "generated_projects": "./generated",
+    "templates": "./templates"
+  },
+  "ai": {
+    "provider": "anthropic",
+    "model": "claude-3-sonnet-20240229",
+    "max_tokens": 4000
+  }
+}

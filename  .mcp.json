@@ -1,0 +1,34 @@
+{
+  "mcpServers": {
+    "python-sdk": {
+      "name": "Python SDK",
+      "description": "Official Python SDK with FastMCP for rapid MCP development",
+      "command": "python",
+      "args": ["-m", "python_sdk.server"],
+      "env": {}
+    },
+    "memory-bank": {
+      "name": "Memory Bank MCP",
+      "description": "Centralized memory system for AI agents",
+      "command": "server-memory",
+      "args": [],
+      "env": {}
+    },
+    "sequential-thinking": {
+      "name": "Sequential Thinking MCP",
+      "description": "Helps LLMs decompose complex tasks into logical steps",
+      "command": "code-reasoning",
+      "args": [],
+      "env": {}
+    },
+    "vibercode": {
+      "name": "ViberCode MCP Server",
+      "command": "vibercode",
+      "args": ["mcp"],
+      "env": {
+        "ANTHROPIC_API_KEY": "${ANTHROPIC_API_KEY}",
+        "VIBE_DEBUG": "true"
+      }
+    }
+  }
+}

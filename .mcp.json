@@ -1,0 +1,30 @@
+{
+  "mcpServers": {
+    "vibercode": {
+      "name": "ViberCode MCP Server",
+      "description": "ViberCode CLI integration for live component editing and code generation",
+      "command": "/usr/local/bin/vibercode",
+      "args": ["mcp"],
+      "env": {
+        "ANTHROPIC_API_KEY": "${ANTHROPIC_API_KEY}",
+        "VIBE_DEBUG": "true",
+        "VIBERCODE_MODE": "mcp"
+      }
+    },
+    "filesystem": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-filesystem",
+        "/Users/jaambee/Projects"
+      ]
+    },
+    "brave-search": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-brave-search"],
+      "env": {
+        "BRAVE_API_KEY": "${BRAVE_API_KEY}"
+      }
+    }
+  }
+}

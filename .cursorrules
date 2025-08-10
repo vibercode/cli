@@ -1,0 +1,107 @@
+# Cursor Rules for Vibercode CLI Go Project
+
+## Project Overview
+This is **Vibercode CLI** - a command-line tool for generating Go web APIs with clean architecture, built entirely in Go using Cobra CLI and native Go templates.
+
+## Task Management System
+
+### Task Organization Rules
+- All project tasks are managed in `tasks.md` with prioritized dependency order
+- Individual task details are stored in `/tasks/` directory as separate markdown files
+- When adding new tasks, analyze dependencies and insert in correct order for coherent development flow
+
+### Task Management Workflow
+1. **New Task Addition**: Always check `tasks.md` for existing tasks and dependencies before adding new ones
+2. **Dependency Analysis**: New tasks must be placed in correct position relative to existing tasks
+3. **Coherent Development**: Task order should ensure logical development progression
+4. **Task Documentation**: Each task requires detailed specification in `/tasks/` directory
+
+### Database Provider Priority
+- **Supabase Integration**: High priority database provider to be added alongside existing PostgreSQL, MySQL, and SQLite support
+- Supabase includes: connection configuration, auth integration, real-time subscriptions, and storage setup
+
+## Code Generation Standards
+
+### File Structure
+- CLI commands in `cmd/` directory
+- Code generation logic in `internal/generator/`
+- Template strings in `internal/templates/`
+- Data models in `internal/models/`
+
+### Go Template System
+- Use Go's native `text/template` package for all code generation
+- Template helper functions: `ToCamel`, `ToLowerCamel`, `ToSnake`, `ToKebab`
+- No external template engines (Handlebars, Mustache, etc.)
+
+### Field Type System
+Support comprehensive field types in `internal/models/field.go`:
+- Basic: `string`, `text`, `number`, `float`, `boolean`
+- Special: `date`, `uuid`, `json`
+- Relations: `relation`, `relation-array`
+
+### Generated Project Architecture
+Follow clean architecture principles:
+- `cmd/server/main.go` - Application entry point
+- `internal/handlers/` - HTTP layer (Gin framework)
+- `internal/services/` - Business logic layer
+- `internal/repositories/` - Data access layer
+- `internal/models/` - Domain models and DTOs
+- `pkg/database/` - Database connection utilities
+
+## Development Best Practices
+
+### Code Quality
+- Follow Go naming conventions
+- Use GORM best practices for database models
+- Include proper error handling in generated code
+- Generate comprehensive validation logic
+- Maintain clean architecture separation
+- Include proper HTTP status codes and responses
+
+### Dependencies
+- **Core CLI**: cobra, promptui, strcase
+- **Generated Projects**: gin, gorm, godotenv, uuid
+- Database drivers: postgres, mysql, sqlite (and Supabase)
+
+### Testing Requirements
+- Unit tests for all generators
+- Template validation tests
+- Integration tests with databases
+- CLI command testing
+
+## Task Implementation Guidelines
+
+### Before Starting New Tasks
+1. Check `tasks.md` for current task priorities
+2. Review task dependencies in `/tasks/` directory
+3. Ensure prerequisites are completed
+4. Update task status during development
+
+### When Adding Features
+1. Analyze impact on existing task dependencies
+2. Update task documentation if needed
+3. Maintain coherent development flow
+4. Test integration with existing features
+
+### Database Provider Development
+- Prioritize Supabase integration
+- Support multiple database providers
+- Include connection pooling and SSL configuration
+- Generate provider-specific templates
+
+## File Naming and Organization
+
+### Template Files
+- Use descriptive names: `model.go`, `handler.go`, `service.go`
+- Group related templates together
+- Include provider-specific templates when needed
+
+### Generator Files
+- Separate generators by functionality: `api.go`, `resource.go`
+- Include validation and error handling
+- Support interactive prompts
+
+### Documentation
+- Update CLAUDE.md for major changes
+- Maintain task documentation in `/tasks/`
+- Include usage examples and best practices
