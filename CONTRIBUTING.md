@@ -235,7 +235,7 @@ Use the feature request template and include:
 - **Discord**: Join our community server
 - **GitHub Discussions**: For questions and discussions
 - **GitHub Issues**: For bug reports and feature requests
-- **Email**: team@vibercode.com for sensitive matters
+- **Email**: aldo@vizto.digital for sensitive matters
 
 ## 🏆 Recognition
 
