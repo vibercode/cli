@@ -1,0 +1,127 @@
+# Binaries for programs and plugins
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+vibercode
+vibercode.exe
+
+# Test binary, built with `go test -c`
+*.test
+
+# Output of the go coverage tool, specifically when used with LiteIDE
+*.out
+
+# Dependency directories (remove the comment below to include it)
+# vendor/
+
+# Go workspace file
+go.work
+
+# Environment variables
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Logs
+*.log
+logs/
+
+# Temporary files
+tmp/
+temp/
+
+# Generated projects (for testing)
+test-projects/
+generated/
+*-api/
+examples/generated-projects/*/
+
+# Coverage reports
+coverage.out
+coverage.html
+
+# Node modules (if any frontend tooling is used)
+node_modules/
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# Build artifacts
+dist/
+build/
+bin/
+
+# Development files
+.vscode/settings.json
+.idea/workspace.xml
+
+# Local configuration
+.env.local
+.env.development
+.env.production
+config.local.env
+
+# Database files
+*.db
+*.sqlite
+*.sqlite3
+
+# AI and MCP related
+.anthropic/
+mcp-logs/
+
+# Archive and backup files
+*.bak
+*.backup
+*.old
+
+# Performance profiling
+*.prof
+*.trace
+
+# Release artifacts
+*.tar.gz
+*.zip
+checksums.txt
+
+# Editor specific
+*.swp
+*.swo
+*~
+.#*
+\#*#
+
+# macOS specific
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+
+# Windows specific
+ehthumbs.db
+Thumbs.db
+Desktop.ini
+
+# Linux specific
+.directory
+.fuse_hidden*
